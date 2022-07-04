@@ -6,12 +6,14 @@ import { GrPowerReset } from "react-icons/gr";
 import "./App.css";
 
 function App() {
-  const [inputText, setInputText] = useState("");
-  const [hover, setHover] = useState(false);
-  const [state, dispatch] = useReducer(reducer, [], init);
+  const [state, dispatch] = useReducer(reducer, [[], false, ""], init);
 
   function init(initArray) {
-    return { todos: initArray };
+    return {
+      todos: initArray[0],
+      isHover: initArray[1],
+      inputText: initArray[2]
+    };
   }
 
   function reducer(state, action) {
@@ -24,6 +26,12 @@ function App() {
             return index !== action.payload.id;
           })
         };
+      case "reset":
+        return init([[], false, ""]);
+      case "hoverReset":
+        return { todos: [...state.todos], isHover: action.payload.isHover };
+      case "setInputText":
+        return { todos: [...state.todos], inputText: action.payload.inputText };
       default:
         return { ...state };
     }
@@ -31,36 +39,28 @@ function App() {
 
   function handleChange(event) {
     const newValue = event.target.value;
-    setInputText(newValue);
+    dispatch({ type: "setInputText", payload: { inputText: newValue } });
   }
 
   function addItem(e) {
     e.preventDefault();
-    dispatch({ type: "addItem", payload: { inputText: inputText } });
-    setInputText("");
+    dispatch({ type: "addItem", payload: { inputText: state.inputText } });
+    dispatch({ type: "setInputText", payload: { inputText: "" } });
   }
 
-  // function deleteItem(id) {
-  //  dispatch({type:"deleteItem", payload: { id:id } })
-
-  // }
-
-  // // function deleteItem(id) {
-  //   setItems((prevItems) => {
-  //     return prevItems.filter((item, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // }
-
+  console.log(state);
   return (
     <div className="container">
       <div className="heading">
         <IconButton
-          onClick={() => setHover(true)}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          style={{ backgroundColor: hover && "#F24C4C" }}
+          onClick={() => dispatch({ type: "reset" })}
+          onMouseEnter={() =>
+            dispatch({ type: "hoverReset", payload: { isHover: true } })
+          }
+          onMouseLeave={() =>
+            dispatch({ type: "hoverReset", payload: { isHover: false } })
+          }
+          style={{ backgroundColor: state.isHover && "#F24C4C" }}
         >
           <GrPowerReset />
         </IconButton>
@@ -68,7 +68,7 @@ function App() {
       </div>
       <div className="form">
         <form onSubmit={addItem}>
-          <input onChange={handleChange} type="text" value={inputText} />
+          <input onChange={handleChange} type="text" value={state.inputText} />
           <button type="submit">
             <span>Add</span>
           </button>
