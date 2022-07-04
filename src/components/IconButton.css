@@ -1,0 +1,15 @@
+.btn {
+  position: relative;
+  color: gray;
+  top: 1px;
+  background-color: transparent;
+  margin: 8px 10px 4px;
+  float: right;
+}
+.btn:hover {
+  color: rgb(219, 83, 29);
+  background-color: rgba(135, 112, 165, 0.15);
+  border-radius: 100%;
+  padding: 8px 10px 4px;
+  margin: 0;
+}
