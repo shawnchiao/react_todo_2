@@ -48,22 +48,23 @@ function App() {
     dispatch({ type: "setInputText", payload: { inputText: "" } });
   }
 
-  console.log(state);
   return (
     <div className="container">
       <div className="heading">
-        <IconButton
-          onClick={() => dispatch({ type: "reset" })}
-          onMouseEnter={() =>
-            dispatch({ type: "hoverReset", payload: { isHover: true } })
-          }
-          onMouseLeave={() =>
-            dispatch({ type: "hoverReset", payload: { isHover: false } })
-          }
-          style={{ backgroundColor: state.isHover && "#F24C4C" }}
-        >
-          <GrPowerReset />
-        </IconButton>
+        <div className="resetBtn">
+          <IconButton
+            onClick={() => dispatch({ type: "reset" })}
+            onMouseEnter={() =>
+              dispatch({ type: "hoverReset", payload: { isHover: true } })
+            }
+            onMouseLeave={() =>
+              dispatch({ type: "hoverReset", payload: { isHover: false } })
+            }
+            style={{ backgroundColor: state.isHover && "#F24C4C" }}
+          >
+            <GrPowerReset />
+          </IconButton>
+        </div>
         <h1>To-Do List</h1>
       </div>
       <div className="form">
