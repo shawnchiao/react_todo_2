@@ -1,15 +1,14 @@
 import React from "react";
 import { BsBookmark, BsBookmarkStarFill } from "react-icons/bs";
-import {
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineCheckBox
-} from "react-icons/md";
+import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 
 import audio from "./clickSound.wav";
 import CheckBox from "./CheckBox";
 import IconButton from "./IconButton";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
+
+import "./todoItem.css";
 
 function ToDoItem(props) {
   const [clicked, setClicked] = React.useState(false);
@@ -25,12 +24,8 @@ function ToDoItem(props) {
     sound.play();
   }
 
-  function space() {
-    props.text.length;
-  }
-
   return (
-    <div>
+    <div className="todoItem">
       <CheckBox>
         <BsBookmark size="20px" className="unchecked" />
         <BsBookmarkStarFill size="20px" className="checked" />
@@ -43,6 +38,7 @@ function ToDoItem(props) {
       >
         <MdOutlineCheckBoxOutlineBlank className="unchecked " />
         <CheckBoxRoundedIcon fontSize="medium" className="checked tick" />
+
         <li style={{ textDecoration: clicked ? "line-through" : "none" }}>
           {props.text}
         </li>

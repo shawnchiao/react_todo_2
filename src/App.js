@@ -1,6 +1,6 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 
-import ToDoItem from "./components/ToDoItem";
+import TodoItem from "./components/TodoItem";
 import IconButton from "./components/IconButton";
 import { GrPowerReset } from "react-icons/gr";
 import "./App.css";
@@ -77,7 +77,7 @@ function App() {
       <div>
         <ul>
           {state.todos.map((eachItem, index) => (
-            <ToDoItem
+            <TodoItem
               key={index}
               id={index}
               text={eachItem}
