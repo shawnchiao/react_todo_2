@@ -31,6 +31,7 @@ function ToDoItem(props) {
         <BsBookmarkStarFill size="20px" className="checked" />
       </CheckBox>
       <CheckBox
+        className="spaceItemContent"
         onClick={() => {
           !clicked && playSound();
           cross();

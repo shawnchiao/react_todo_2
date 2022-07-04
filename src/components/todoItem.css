@@ -1,4 +1,9 @@
 .todoItem {
-  display: block;
+  display: flex;
+  align-items: baseline;
   height: 50px;
+}
+
+.spaceItemContent {
+  flex-grow: 4;
 }
