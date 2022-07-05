@@ -29,9 +29,9 @@ function App() {
       case "reset":
         return init([[], false, ""]);
       case "hoverReset":
-        return { todos: [...state.todos], isHover: action.payload.isHover };
+        return { ...state, isHover: action.payload.isHover };
       case "setInputText":
-        return { todos: [...state.todos], inputText: action.payload.inputText };
+        return { ...state, inputText: action.payload.inputText };
       default:
         return { ...state };
     }

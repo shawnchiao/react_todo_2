@@ -1,11 +1,8 @@
 {
-  "name": "react",
+  "name": "main",
   "version": "1.0.0",
-  "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "@emotion/react": "11.9.3",
