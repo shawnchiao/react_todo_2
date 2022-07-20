@@ -1,28 +1,24 @@
-import React, { ChangeEvent, ChangeEventHandler, EventHandler, useReducer } from "react";
+import React, { useReducer } from "react";
 
 import TodoItem from "./components/TodoItem";
 import IconButton from "./components/IconButton";
 import { GrPowerReset } from "react-icons/gr";
 import "./App.css";
 
-interface  StateType{
-  todos:[],
-  isHovered: boolean,
-  inputText: string
+interface StateType {
+  todos: [];
+  isHovered: boolean;
+  inputText: string;
 }
-type ACTIONTYPE = 
-  | { type: "addItem"; payload: string}
-  | { type: "deleteItem"; payload: number}
-  | { type: "reset";  }
-  | { type: "hoverReset"; payload: boolean}
-  | { type: "setInputText"; payload: string|null };
-
-
+type ACTIONTYPE =
+  | { type: "addItem"; payload: string }
+  | { type: "deleteItem"; payload: number }
+  | { type: "reset" }
+  | { type: "hoverReset"; payload: boolean }
+  | { type: "setInputText"; payload: string | null };
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, [[], false, ""], init);
-
-  function init(initArray:any[]) {
+  function init(initArray: any[]) {
     return {
       todos: initArray[0],
       isHovered: initArray[1],
@@ -30,7 +26,7 @@ function App() {
     };
   }
 
-  function reducer(state:StateType, action:ACTIONTYPE) : any{
+  function reducer(state: StateType, action: ACTIONTYPE): any {
     switch (action.type) {
       case "addItem":
         return { todos: [...state.todos, action.payload] };
@@ -50,16 +46,17 @@ function App() {
         return { ...state };
     }
   }
+  const [state, dispatch] = useReducer(reducer, [[], false, ""], init);
 
-  function handleChange(event:React.FormEvent<HTMLInputElement>) {
+  function handleChange(event: React.FormEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value;
-    dispatch({ type: "setInputText", payload: newValue  });
+    dispatch({ type: "setInputText", payload: newValue });
   }
 
-  function addItem(e:React.FormEvent) {
+  function addItem(e: React.FormEvent) {
     e.preventDefault();
-    dispatch({ type: "addItem", payload:  state.inputText });
-    dispatch({ type: "setInputText", payload:"" });
+    dispatch({ type: "addItem", payload: state.inputText });
+    dispatch({ type: "setInputText", payload: "" });
   }
 
   return (
@@ -68,9 +65,7 @@ function App() {
         <div className="resetBtn">
           <IconButton
             onClick={() => dispatch({ type: "reset" })}
-            onMouseEnter={() =>
-              dispatch({ type: "hoverReset", payload: true })
-            }
+            onMouseEnter={() => dispatch({ type: "hoverReset", payload: true })}
             onMouseLeave={() =>
               dispatch({ type: "hoverReset", payload: false })
             }
@@ -91,7 +86,7 @@ function App() {
       </div>
       <div>
         <ul>
-          {state.todos.map((eachItem:string, index:number) => (
+          {state.todos.map((eachItem: string, index: number) => (
             <TodoItem
               key={index}
               id={index}
